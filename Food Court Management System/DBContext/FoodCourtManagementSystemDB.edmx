@@ -1,0 +1,1087 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FoodCourtManagementSystemDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="TotalAmount" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Cart_FoodItem">
+          <Key>
+            <PropertyRef Name="CartID" />
+            <PropertyRef Name="ItemID" />
+            <PropertyRef Name="RestaurantID" />
+          </Key>
+          <Property Name="CartID" Type="int" Nullable="false" />
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="RestaurantID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Coupon">
+          <Key>
+            <PropertyRef Name="CouponID" />
+          </Key>
+          <Property Name="CouponID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CouponCode" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="ExpiryDate" Type="date" Nullable="false" />
+          <Property Name="OrderValue" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="AvailableQuantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Customer_GiftCard_Use">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="GiftCardID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="GiftCardID" Type="int" Nullable="false" />
+          <Property Name="RedeemTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RestaurantID" Type="int" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Designation" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FoodItem">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="4000" />
+        </EntityType>
+        <EntityType Name="GiftCard">
+          <Key>
+            <PropertyRef Name="GiftCardID" />
+          </Key>
+          <Property Name="GiftCardID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GiftCode" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ExpiryDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="CouponID" Type="int" />
+          <Property Name="OrderTime" Type="datetime" Nullable="false" />
+          <Property Name="OrderAmount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="OrderStatus" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order_FoodItem">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="RestaurantID" Type="int" Nullable="false" />
+          <Property Name="OrderedQuantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="RestaurantID" />
+          </Key>
+          <Property Name="RestaurantID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurant_FoodItem">
+          <Key>
+            <PropertyRef Name="RestaurantID" />
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="RestaurantID" Type="int" Nullable="false" />
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="AvailableQuantity" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" />
+          <Property Name="WalletID" Type="int" Nullable="false" />
+          <Property Name="TransactionTime" Type="datetime" Nullable="false" />
+          <Property Name="TransactionAmount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Note" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Wallet">
+          <Key>
+            <PropertyRef Name="WalletID" />
+          </Key>
+          <Property Name="WalletID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="Pin" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Balance" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_cart_customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_cart_fooditem_cart">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+          <End Role="Cart_FoodItem" Type="Self.Cart_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="CartID" />
+            </Principal>
+            <Dependent Role="Cart_FoodItem">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_cart_fooditem_fooditem">
+          <End Role="FoodItem" Type="Self.FoodItem" Multiplicity="1" />
+          <End Role="Cart_FoodItem" Type="Self.Cart_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodItem">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="Cart_FoodItem">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_cart_fooditem_restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="Cart_FoodItem" Type="Self.Cart_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Cart_FoodItem">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_cgcu_customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Customer_GiftCard_Use" Type="Self.Customer_GiftCard_Use" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Customer_GiftCard_Use">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_cgcu_giftcard">
+          <End Role="GiftCard" Type="Self.GiftCard" Multiplicity="1" />
+          <End Role="Customer_GiftCard_Use" Type="Self.Customer_GiftCard_Use" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiftCard">
+              <PropertyRef Name="GiftCardID" />
+            </Principal>
+            <Dependent Role="Customer_GiftCard_Use">
+              <PropertyRef Name="GiftCardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_employee_restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ofi_fooditem">
+          <End Role="FoodItem" Type="Self.FoodItem" Multiplicity="1" />
+          <End Role="Order_FoodItem" Type="Self.Order_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodItem">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="Order_FoodItem">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ofi_order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Order_FoodItem" Type="Self.Order_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Order_FoodItem">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ofi_restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="Order_FoodItem" Type="Self.Order_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Order_FoodItem">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_order_coupon">
+          <End Role="Coupon" Type="Self.Coupon" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_order_customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rf_fooditem">
+          <End Role="FoodItem" Type="Self.FoodItem" Multiplicity="1" />
+          <End Role="Restaurant_FoodItem" Type="Self.Restaurant_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodItem">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="Restaurant_FoodItem">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rf_restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="Restaurant_FoodItem" Type="Self.Restaurant_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Restaurant_FoodItem">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_transaction_order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_transaction_wallet">
+          <End Role="Wallet" Type="Self.Wallet" Multiplicity="1" />
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wallet">
+              <PropertyRef Name="WalletID" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="WalletID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_wallet_customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Wallet" Type="Self.Wallet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Wallet">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FoodCourtManagementSystemDBModelStoreContainer">
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cart_FoodItem" EntityType="Self.Cart_FoodItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Coupon" EntityType="Self.Coupon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer_GiftCard_Use" EntityType="Self.Customer_GiftCard_Use" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FoodItem" EntityType="Self.FoodItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GiftCard" EntityType="Self.GiftCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_FoodItem" EntityType="Self.Order_FoodItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurant" EntityType="Self.Restaurant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurant_FoodItem" EntityType="Self.Restaurant_FoodItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wallet" EntityType="Self.Wallet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_cart_customer" Association="Self.fk_cart_customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="fk_cart_fooditem_cart" Association="Self.fk_cart_fooditem_cart">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="Cart_FoodItem" EntitySet="Cart_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_cart_fooditem_fooditem" Association="Self.fk_cart_fooditem_fooditem">
+            <End Role="FoodItem" EntitySet="FoodItem" />
+            <End Role="Cart_FoodItem" EntitySet="Cart_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_cart_fooditem_restaurant" Association="Self.fk_cart_fooditem_restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="Cart_FoodItem" EntitySet="Cart_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_cgcu_customer" Association="Self.fk_cgcu_customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Customer_GiftCard_Use" EntitySet="Customer_GiftCard_Use" />
+          </AssociationSet>
+          <AssociationSet Name="fk_cgcu_giftcard" Association="Self.fk_cgcu_giftcard">
+            <End Role="GiftCard" EntitySet="GiftCard" />
+            <End Role="Customer_GiftCard_Use" EntitySet="Customer_GiftCard_Use" />
+          </AssociationSet>
+          <AssociationSet Name="fk_employee_restaurant" Association="Self.fk_employee_restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ofi_fooditem" Association="Self.fk_ofi_fooditem">
+            <End Role="FoodItem" EntitySet="FoodItem" />
+            <End Role="Order_FoodItem" EntitySet="Order_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ofi_order" Association="Self.fk_ofi_order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Order_FoodItem" EntitySet="Order_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ofi_restaurant" Association="Self.fk_ofi_restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="Order_FoodItem" EntitySet="Order_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_order_coupon" Association="Self.fk_order_coupon">
+            <End Role="Coupon" EntitySet="Coupon" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="fk_order_customer" Association="Self.fk_order_customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rf_fooditem" Association="Self.fk_rf_fooditem">
+            <End Role="FoodItem" EntitySet="FoodItem" />
+            <End Role="Restaurant_FoodItem" EntitySet="Restaurant_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rf_restaurant" Association="Self.fk_rf_restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="Restaurant_FoodItem" EntitySet="Restaurant_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_transaction_order" Association="Self.fk_transaction_order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_transaction_wallet" Association="Self.fk_transaction_wallet">
+            <End Role="Wallet" EntitySet="Wallet" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_wallet_customer" Association="Self.fk_wallet_customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Wallet" EntitySet="Wallet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FoodCourtManagementSystemDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Customer" Relationship="Self.fk_cart_customer" FromRole="Cart" ToRole="Customer" />
+          <NavigationProperty Name="Cart_FoodItem" Relationship="Self.fk_cart_fooditem_cart" FromRole="Cart" ToRole="Cart_FoodItem" />
+        </EntityType>
+        <EntityType Name="Cart_FoodItem">
+          <Key>
+            <PropertyRef Name="CartID" />
+            <PropertyRef Name="ItemID" />
+            <PropertyRef Name="RestaurantID" />
+          </Key>
+          <Property Name="CartID" Type="Int32" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="RestaurantID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cart" Relationship="Self.fk_cart_fooditem_cart" FromRole="Cart_FoodItem" ToRole="Cart" />
+          <NavigationProperty Name="FoodItem" Relationship="Self.fk_cart_fooditem_fooditem" FromRole="Cart_FoodItem" ToRole="FoodItem" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.fk_cart_fooditem_restaurant" FromRole="Cart_FoodItem" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="Coupon">
+          <Key>
+            <PropertyRef Name="CouponID" />
+          </Key>
+          <Property Name="CouponID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CouponCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Discount" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OrderValue" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AvailableQuantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.fk_order_coupon" FromRole="Coupon" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cart" Relationship="Self.fk_cart_customer" FromRole="Customer" ToRole="Cart" />
+          <NavigationProperty Name="Customer_GiftCard_Use" Relationship="Self.fk_cgcu_customer" FromRole="Customer" ToRole="Customer_GiftCard_Use" />
+          <NavigationProperty Name="Order" Relationship="Self.fk_order_customer" FromRole="Customer" ToRole="Order" />
+          <NavigationProperty Name="Wallet" Relationship="Self.fk_wallet_customer" FromRole="Customer" ToRole="Wallet" />
+        </EntityType>
+        <EntityType Name="Customer_GiftCard_Use">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="GiftCardID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="GiftCardID" Type="Int32" Nullable="false" />
+          <Property Name="RedeemTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="Self.fk_cgcu_customer" FromRole="Customer_GiftCard_Use" ToRole="Customer" />
+          <NavigationProperty Name="GiftCard" Relationship="Self.fk_cgcu_giftcard" FromRole="Customer_GiftCard_Use" ToRole="GiftCard" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RestaurantID" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Designation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.fk_employee_restaurant" FromRole="Employee" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="FoodItem">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cart_FoodItem" Relationship="Self.fk_cart_fooditem_fooditem" FromRole="FoodItem" ToRole="Cart_FoodItem" />
+          <NavigationProperty Name="Order_FoodItem" Relationship="Self.fk_ofi_fooditem" FromRole="FoodItem" ToRole="Order_FoodItem" />
+          <NavigationProperty Name="Restaurant_FoodItem" Relationship="Self.fk_rf_fooditem" FromRole="FoodItem" ToRole="Restaurant_FoodItem" />
+        </EntityType>
+        <EntityType Name="GiftCard">
+          <Key>
+            <PropertyRef Name="GiftCardID" />
+          </Key>
+          <Property Name="GiftCardID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GiftCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Customer_GiftCard_Use" Relationship="Self.fk_cgcu_giftcard" FromRole="GiftCard" ToRole="Customer_GiftCard_Use" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="CouponID" Type="Int32" />
+          <Property Name="OrderTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OrderAmount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="OrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Coupon" Relationship="Self.fk_order_coupon" FromRole="Order" ToRole="Coupon" />
+          <NavigationProperty Name="Customer" Relationship="Self.fk_order_customer" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="Order_FoodItem" Relationship="Self.fk_ofi_order" FromRole="Order" ToRole="Order_FoodItem" />
+          <NavigationProperty Name="Transaction" Relationship="Self.fk_transaction_order" FromRole="Order" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="Order_FoodItem">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="RestaurantID" Type="Int32" Nullable="false" />
+          <Property Name="OrderedQuantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FoodItem" Relationship="Self.fk_ofi_fooditem" FromRole="Order_FoodItem" ToRole="FoodItem" />
+          <NavigationProperty Name="Order" Relationship="Self.fk_ofi_order" FromRole="Order_FoodItem" ToRole="Order" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.fk_ofi_restaurant" FromRole="Order_FoodItem" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="RestaurantID" />
+          </Key>
+          <Property Name="RestaurantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cart_FoodItem" Relationship="Self.fk_cart_fooditem_restaurant" FromRole="Restaurant" ToRole="Cart_FoodItem" />
+          <NavigationProperty Name="Employee" Relationship="Self.fk_employee_restaurant" FromRole="Restaurant" ToRole="Employee" />
+          <NavigationProperty Name="Order_FoodItem" Relationship="Self.fk_ofi_restaurant" FromRole="Restaurant" ToRole="Order_FoodItem" />
+          <NavigationProperty Name="Restaurant_FoodItem" Relationship="Self.fk_rf_restaurant" FromRole="Restaurant" ToRole="Restaurant_FoodItem" />
+        </EntityType>
+        <EntityType Name="Restaurant_FoodItem">
+          <Key>
+            <PropertyRef Name="RestaurantID" />
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="RestaurantID" Type="Int32" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="AvailableQuantity" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="FoodItem" Relationship="Self.fk_rf_fooditem" FromRole="Restaurant_FoodItem" ToRole="FoodItem" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.fk_rf_restaurant" FromRole="Restaurant_FoodItem" ToRole="Restaurant" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="WalletID" Type="Int32" Nullable="false" />
+          <Property Name="TransactionTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionAmount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Order" Relationship="Self.fk_transaction_order" FromRole="Transaction" ToRole="Order" />
+          <NavigationProperty Name="Wallet" Relationship="Self.fk_transaction_wallet" FromRole="Transaction" ToRole="Wallet" />
+        </EntityType>
+        <EntityType Name="Wallet">
+          <Key>
+            <PropertyRef Name="WalletID" />
+          </Key>
+          <Property Name="WalletID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="Pin" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Balance" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.fk_wallet_customer" FromRole="Wallet" ToRole="Customer" />
+          <NavigationProperty Name="Transaction" Relationship="Self.fk_transaction_wallet" FromRole="Wallet" ToRole="Transaction" />
+        </EntityType>
+        <Association Name="fk_cart_customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_cart_fooditem_cart">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+          <End Role="Cart_FoodItem" Type="Self.Cart_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="CartID" />
+            </Principal>
+            <Dependent Role="Cart_FoodItem">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_cart_fooditem_fooditem">
+          <End Role="FoodItem" Type="Self.FoodItem" Multiplicity="1" />
+          <End Role="Cart_FoodItem" Type="Self.Cart_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodItem">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="Cart_FoodItem">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_cart_fooditem_restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="Cart_FoodItem" Type="Self.Cart_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Cart_FoodItem">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_order_coupon">
+          <End Role="Coupon" Type="Self.Coupon" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="CouponID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_cgcu_customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Customer_GiftCard_Use" Type="Self.Customer_GiftCard_Use" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Customer_GiftCard_Use">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_order_customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_wallet_customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Wallet" Type="Self.Wallet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Wallet">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_cgcu_giftcard">
+          <End Role="GiftCard" Type="Self.GiftCard" Multiplicity="1" />
+          <End Role="Customer_GiftCard_Use" Type="Self.Customer_GiftCard_Use" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiftCard">
+              <PropertyRef Name="GiftCardID" />
+            </Principal>
+            <Dependent Role="Customer_GiftCard_Use">
+              <PropertyRef Name="GiftCardID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_employee_restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ofi_fooditem">
+          <End Role="FoodItem" Type="Self.FoodItem" Multiplicity="1" />
+          <End Role="Order_FoodItem" Type="Self.Order_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodItem">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="Order_FoodItem">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rf_fooditem">
+          <End Role="FoodItem" Type="Self.FoodItem" Multiplicity="1" />
+          <End Role="Restaurant_FoodItem" Type="Self.Restaurant_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FoodItem">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="Restaurant_FoodItem">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ofi_order">
+          <End Role="Order" Type="Self.Order" Multiplicity="1" />
+          <End Role="Order_FoodItem" Type="Self.Order_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Order_FoodItem">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_transaction_order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ofi_restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="Order_FoodItem" Type="Self.Order_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Order_FoodItem">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rf_restaurant">
+          <End Role="Restaurant" Type="Self.Restaurant" Multiplicity="1" />
+          <End Role="Restaurant_FoodItem" Type="Self.Restaurant_FoodItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Restaurant_FoodItem">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_transaction_wallet">
+          <End Role="Wallet" Type="Self.Wallet" Multiplicity="1" />
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wallet">
+              <PropertyRef Name="WalletID" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="WalletID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FoodCourtManagementSystemDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cart" EntityType="Self.Cart" />
+          <EntitySet Name="Cart_FoodItem" EntityType="Self.Cart_FoodItem" />
+          <EntitySet Name="Coupon" EntityType="Self.Coupon" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="Customer_GiftCard_Use" EntityType="Self.Customer_GiftCard_Use" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="FoodItem" EntityType="Self.FoodItem" />
+          <EntitySet Name="GiftCard" EntityType="Self.GiftCard" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="Order_FoodItem" EntityType="Self.Order_FoodItem" />
+          <EntitySet Name="Restaurant" EntityType="Self.Restaurant" />
+          <EntitySet Name="Restaurant_FoodItem" EntityType="Self.Restaurant_FoodItem" />
+          <EntitySet Name="Transaction" EntityType="Self.Transaction" />
+          <EntitySet Name="Wallet" EntityType="Self.Wallet" />
+          <AssociationSet Name="fk_cart_customer" Association="Self.fk_cart_customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="fk_cart_fooditem_cart" Association="Self.fk_cart_fooditem_cart">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="Cart_FoodItem" EntitySet="Cart_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_cart_fooditem_fooditem" Association="Self.fk_cart_fooditem_fooditem">
+            <End Role="FoodItem" EntitySet="FoodItem" />
+            <End Role="Cart_FoodItem" EntitySet="Cart_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_cart_fooditem_restaurant" Association="Self.fk_cart_fooditem_restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="Cart_FoodItem" EntitySet="Cart_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_order_coupon" Association="Self.fk_order_coupon">
+            <End Role="Coupon" EntitySet="Coupon" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="fk_cgcu_customer" Association="Self.fk_cgcu_customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Customer_GiftCard_Use" EntitySet="Customer_GiftCard_Use" />
+          </AssociationSet>
+          <AssociationSet Name="fk_order_customer" Association="Self.fk_order_customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="fk_wallet_customer" Association="Self.fk_wallet_customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Wallet" EntitySet="Wallet" />
+          </AssociationSet>
+          <AssociationSet Name="fk_cgcu_giftcard" Association="Self.fk_cgcu_giftcard">
+            <End Role="GiftCard" EntitySet="GiftCard" />
+            <End Role="Customer_GiftCard_Use" EntitySet="Customer_GiftCard_Use" />
+          </AssociationSet>
+          <AssociationSet Name="fk_employee_restaurant" Association="Self.fk_employee_restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ofi_fooditem" Association="Self.fk_ofi_fooditem">
+            <End Role="FoodItem" EntitySet="FoodItem" />
+            <End Role="Order_FoodItem" EntitySet="Order_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rf_fooditem" Association="Self.fk_rf_fooditem">
+            <End Role="FoodItem" EntitySet="FoodItem" />
+            <End Role="Restaurant_FoodItem" EntitySet="Restaurant_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ofi_order" Association="Self.fk_ofi_order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Order_FoodItem" EntitySet="Order_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_transaction_order" Association="Self.fk_transaction_order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ofi_restaurant" Association="Self.fk_ofi_restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="Order_FoodItem" EntitySet="Order_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rf_restaurant" Association="Self.fk_rf_restaurant">
+            <End Role="Restaurant" EntitySet="Restaurant" />
+            <End Role="Restaurant_FoodItem" EntitySet="Restaurant_FoodItem" />
+          </AssociationSet>
+          <AssociationSet Name="fk_transaction_wallet" Association="Self.fk_transaction_wallet">
+            <End Role="Wallet" EntitySet="Wallet" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FoodCourtManagementSystemDBModelStoreContainer" CdmEntityContainer="FoodCourtManagementSystemDBEntities">
+          <EntitySetMapping Name="Cart">
+            <EntityTypeMapping TypeName="FoodCourtManagementSystemDBModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cart_FoodItem">
+            <EntityTypeMapping TypeName="FoodCourtManagementSystemDBModel.Cart_FoodItem">
+              <MappingFragment StoreEntitySet="Cart_FoodItem">
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Coupon">
+            <EntityTypeMapping TypeName="FoodCourtManagementSystemDBModel.Coupon">
+              <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="CouponID" ColumnName="CouponID" />
+                <ScalarProperty Name="CouponCode" ColumnName="CouponCode" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="OrderValue" ColumnName="OrderValue" />
+                <ScalarProperty Name="AvailableQuantity" ColumnName="AvailableQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="FoodCourtManagementSystemDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer_GiftCard_Use">
+            <EntityTypeMapping TypeName="FoodCourtManagementSystemDBModel.Customer_GiftCard_Use">
+              <MappingFragment StoreEntitySet="Customer_GiftCard_Use">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="GiftCardID" ColumnName="GiftCardID" />
+                <ScalarProperty Name="RedeemTime" ColumnName="RedeemTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="FoodCourtManagementSystemDBModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FoodItem">
+            <EntityTypeMapping TypeName="FoodCourtManagementSystemDBModel.FoodItem">
+              <MappingFragment StoreEntitySet="FoodItem">
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GiftCard">
+            <EntityTypeMapping TypeName="FoodCourtManagementSystemDBModel.GiftCard">
+              <MappingFragment StoreEntitySet="GiftCard">
+                <ScalarProperty Name="GiftCardID" ColumnName="GiftCardID" />
+                <ScalarProperty Name="GiftCode" ColumnName="GiftCode" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="FoodCourtManagementSystemDBModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CouponID" ColumnName="CouponID" />
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+                <ScalarProperty Name="OrderAmount" ColumnName="OrderAmount" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_FoodItem">
+            <EntityTypeMapping TypeName="FoodCourtManagementSystemDBModel.Order_FoodItem">
+              <MappingFragment StoreEntitySet="Order_FoodItem">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="OrderedQuantity" ColumnName="OrderedQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurant">
+            <EntityTypeMapping TypeName="FoodCourtManagementSystemDBModel.Restaurant">
+              <MappingFragment StoreEntitySet="Restaurant">
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurant_FoodItem">
+            <EntityTypeMapping TypeName="FoodCourtManagementSystemDBModel.Restaurant_FoodItem">
+              <MappingFragment StoreEntitySet="Restaurant_FoodItem">
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="AvailableQuantity" ColumnName="AvailableQuantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transaction">
+            <EntityTypeMapping TypeName="FoodCourtManagementSystemDBModel.Transaction">
+              <MappingFragment StoreEntitySet="Transaction">
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="WalletID" ColumnName="WalletID" />
+                <ScalarProperty Name="TransactionTime" ColumnName="TransactionTime" />
+                <ScalarProperty Name="TransactionAmount" ColumnName="TransactionAmount" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wallet">
+            <EntityTypeMapping TypeName="FoodCourtManagementSystemDBModel.Wallet">
+              <MappingFragment StoreEntitySet="Wallet">
+                <ScalarProperty Name="WalletID" ColumnName="WalletID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Pin" ColumnName="Pin" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

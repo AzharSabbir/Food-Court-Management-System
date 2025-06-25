@@ -1,0 +1,72 @@
+﻿@model Food_Court_Management_System.Models.RestaurantProfileViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Profile</title>
+    <link rel="stylesheet" href="~/Content/CSS/RestaurantProfile.css" />
+</head>
+<body>
+    <div class="profile-container">
+        <div class="sidebar">
+            <div class="logo">
+                <h2>Food Court</h2>
+            </div>
+            <ul class="nav-list">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Employees</a></li>
+                <li><a href="#">Menu Management</a></li>
+                <li><a href="#">Orders</a></li>
+                <li><a href="#">Transactions</a></li>
+                <li><a href="#">Coupons</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="header">
+                <h1>Restaurant Profile</h1>
+                <div class="user-info">
+                    <span>Welcome, @Model.Name</span>
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+
+            <div class="profile-info">
+                <h2>Restaurant Information</h2>
+                <form class="profile-form" method="post">
+                    <div class="form-group">
+                        <label for="restaurant-name">Restaurant Name</label>
+                        <input type="text" id="restaurant-name" name="Name" value="@Model.Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="Email" value="@Model.Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="Phone" value="@Model.Phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea id="address" name="Address" rows="4" required>@Model.Address</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="Password" value="@Model.Password" required>
+                    </div>
+                    <button type="submit" class="save-btn">Save Changes</button>
+                </form>
+                @if (ViewBag.Message != null)
+                {
+                    <p style="color: green;">@ViewBag.Message</p>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

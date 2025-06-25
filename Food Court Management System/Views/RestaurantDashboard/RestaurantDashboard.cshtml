@@ -1,0 +1,83 @@
+﻿@model Food_Court_Management_System.Models.RestaurantDashboardViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Dashboard</title>
+    <link rel="stylesheet" href="~/Content/CSS/RestaurantDashboard.css" />
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="logo">
+                <h2>Food Court</h2>
+            </div>
+            <ul class="nav-list">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Employees</a></li>
+                <li><a href="#">Menu Management</a></li>
+                <li><a href="#">Orders</a></li>
+                <li><a href="#">Transactions</a></li>
+                <li><a href="#">Coupons</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="header">
+                <h1>Restaurant Dashboard</h1>
+                <div class="user-info">
+                    <span>Welcome, @Model.ManagerName</span>
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+
+            <div class="overview">
+                <div class="card">
+                    <h3>Total Orders</h3>
+                    <p>@Model.TotalOrders</p>
+                </div>
+                <div class="card">
+                    <h3>Total Sales</h3>
+                    <p>$@Model.TotalSales</p>
+                </div>
+                <div class="card">
+                    <h3>Active Coupons</h3>
+                    <p>@Model.ActiveCoupons</p>
+                </div>
+            </div>
+
+            <div class="latest-orders">
+                <h2>Latest Orders</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model.LatestOrders)
+                        {
+                            <tr>
+                                <td>@order.OrderID</td>
+                                <td>@order.Customer</td>
+                                <td>$@order.Amount</td>
+                                <td>@order.Status</td>
+                                <td>@order.Time</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

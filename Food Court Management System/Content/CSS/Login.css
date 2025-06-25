@@ -1,0 +1,123 @@
+﻿/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Background styling */
+body {
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Login container styling */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.login-box {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Tab buttons styling */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    width: 48%;
+}
+
+    .tab-btn.active {
+        background-color: #6345D5;
+        color: #fff;
+        border-color: #6345D5;
+    }
+
+/* Input fields styling */
+.input-group {
+    margin-bottom: 15px;
+}
+
+    .input-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+/* Button styling */
+.actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #6345D5;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .btn:hover {
+        background-color: #4b35a1;
+    }
+
+/* Forgot password link */
+.forgot-password {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+    .forgot-password a {
+        text-decoration: none;
+        color: #6345D5;
+    }
+
+/* Register link */
+.register-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+    .register-link a {
+        text-decoration: none;
+        color: #6345D5;
+    }

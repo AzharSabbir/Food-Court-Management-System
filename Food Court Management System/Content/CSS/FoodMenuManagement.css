@@ -1,0 +1,203 @@
+﻿/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Background and layout styling */
+body {
+    background-color: #f4f4f4;
+    display: flex;
+    height: 100vh;
+}
+
+.menu-management-container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #6345D5;
+    padding-top: 20px;
+    color: white;
+    height: 100vh;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+    .logo h2 {
+        color: #fff;
+        font-size: 24px;
+    }
+
+.nav-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+    .nav-list li {
+        margin: 20px 0;
+        text-align: center;
+    }
+
+        .nav-list li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+            .nav-list li a:hover {
+                background-color: #4b35a1;
+            }
+
+/* Main content area */
+.main-content {
+    width: 100%;
+    padding: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+    .header h1 {
+        color: #333;
+    }
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+    .user-info span {
+        margin-right: 20px;
+        color: #333;
+    }
+
+.logout-btn {
+    padding: 10px 15px;
+    background-color: #6345D5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .logout-btn:hover {
+        background-color: #4b35a1;
+    }
+
+/* Menu list table */
+.menu-list {
+    margin-bottom: 40px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .menu-list h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    table th, table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+        background-color: #6345D5;
+        color: white;
+    }
+
+    table tbody tr:hover {
+        background-color: #f9f9f9;
+    }
+
+.edit-btn, .delete-btn {
+    padding: 6px 12px;
+    margin: 5px;
+    background-color: #6345D5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .edit-btn:hover, .delete-btn:hover {
+        background-color: #4b35a1;
+    }
+
+/* Add menu item form section */
+.add-menu-item {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .add-menu-item h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+.menu-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+    .form-group label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .form-group textarea {
+        resize: vertical;
+    }
+
+.save-btn {
+    padding: 12px;
+    background-color: #6345D5;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .save-btn:hover {
+        background-color: #4b35a1;
+    }

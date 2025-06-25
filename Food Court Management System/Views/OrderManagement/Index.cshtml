@@ -1,0 +1,100 @@
+﻿@model Food_Court_Management_System.Models.OrderManagementViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Management</title>
+    <link rel="stylesheet" href="~/Content/CSS/OrderManagement.css" />
+</head>
+<body>
+    <div class="order-management-container">
+        <div class="sidebar">
+            <div class="logo"><h2>Food Court</h2></div>
+            <ul class="nav-list">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Employees</a></li>
+                <li><a href="#">Menu Management</a></li>
+                <li><a href="#">Orders</a></li>
+                <li><a href="#">Transactions</a></li>
+                <li><a href="#">Coupons</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="header">
+                <h1>Order Management</h1>
+                <div class="user-info">
+                    <span>Welcome, Restaurant Manager</span>
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </div>
+
+            <div class="order-list">
+                <h2>Recent Orders</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer ID</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model.Orders)
+                        {
+                            <tr>
+                                <td>#@order.OrderID</td>
+                                <td>@order.CustomerID</td>
+                                <td>$@order.OrderAmount</td>
+                                <td>@order.OrderStatus</td>
+                                <td>@order.OrderTime.ToShortTimeString()</td>
+                                <td>
+                                    <a href="@Url.Action("Index", new { id = order.OrderID })" class="action-btn">View</a>
+
+                                    <form method="post" action="@Url.Action("MarkCompleted", new { id = order.OrderID })" style="display:inline;">
+                                        <button type="submit" class="action-btn">Cancel</button>
+                                    </form>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @if (Model.SelectedOrder != null)
+            {
+                <div class="order-details">
+                    <h2>Order Details</h2>
+                    <div class="order-summary">
+                        <p><strong>Order ID:</strong> #@Model.SelectedOrder.OrderID</p>
+                        <p><strong>Customer:</strong> @Model.SelectedCustomerName</p>
+                        <p><strong>Amount:</strong> $@Model.SelectedOrder.OrderAmount</p>
+                        <p><strong>Status:</strong> @Model.SelectedOrder.OrderStatus</p>
+                        <p><strong>Items:</strong></p>
+                        <ul>
+                            @foreach (var item in Model.OrderedItems)
+                            {
+                                <li>@item</li>
+                            }
+                        </ul>
+                        @if (Model.SelectedOrder.OrderStatus != "Completed")
+                        {
+                            <form method="post" action="@Url.Action("MarkCompleted", new { id = Model.SelectedOrder.OrderID })">
+                                <button class="mark-complete-btn" type="submit">Mark as Completed</button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
+</html>
