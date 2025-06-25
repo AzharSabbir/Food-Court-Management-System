@@ -1,0 +1,51 @@
+/.vs
+/packages
+
+Food Court Management System/bin/*
+Food Court Management System/obj/*
+
+# Ignore everything in 3D Model except selected files
+Food Court Management System/Assets/3D Model/*
+!Food Court Management System/Assets/3D Model/
+!Food Court Management System/Assets/3D Model/README.md
+!Food Court Management System/Assets/3D Model/3d-model.jpg
+
+# Ignore everything in E-Book except selected files
+Food Court Management System/Assets/E-Book/*
+!Food Court Management System/Assets/E-Book/
+!Food Court Management System/Assets/E-Book/README.md
+!Food Court Management System/Assets/E-Book/ebook.jpg
+
+# Ignore everything in Carousel except selected files
+Food Court Management System/Assets/carousel_images/*
+!Food Court Management System/Assets/carousel_images/
+!Food Court Management System/Assets/carousel_images/README.md
+
+!Food Court Management System/Assets/E-Book/subcat-ebook-business-and-career.jpg
+!Food Court Management System/Assets/E-Book/subcat-ebook-civil-engineering.jpg
+!Food Court Management System/Assets/E-Book/subcat-ebook-machine-learning.jpg
+!Food Court Management System/Assets/E-Book/subcat-ebook-self-improvement.jpg
+
+# Ignore everything in graphics_template except selected files
+Food Court Management System/Assets/Graphics Template/*
+!Food Court Management System/Assets/Graphics Template/
+!Food Court Management System/Assets/Graphics Template/README.md
+!Food Court Management System/Assets/Graphics Template/graphics-template.jpg
+
+!Food Court Management System/Assets/Graphics Template/subcat-graphics-template-business-card.jpg
+!Food Court Management System/Assets/Graphics Template/subcat-graphics-template-Id-card.jpg
+!Food Court Management System/Assets/Graphics Template/subcat-graphics-template-letterhead.jpg
+!Food Court Management System/Assets/Graphics Template/subcat-graphics-template-logo.jpg
+
+# Ignore everything in presentation_slide except selected files
+Food Court Management System/Assets/Presentation Slide/*
+!Food Court Management System/Assets/Presentation Slide/
+!Food Court Management System/Assets/Presentation Slide/README.md
+!Food Court Management System/Assets/Presentation Slide/presentation-slide.jpg
+
+# Ignore everything in user_profile_image except selected files
+Food Court Management System/Assets/user_profile_image/*
+!Food Court Management System/Assets/user_profile_image/
+!Food Court Management System/Assets/user_profile_image/digital-arena-logo.png
+!Food Court Management System/Assets/user_profile_image/avatar.jpg
+!Food Court Management System/Assets/user_profile_image/README.md
