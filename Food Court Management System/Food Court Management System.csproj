@@ -35,6 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -52,12 +53,50 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.23.1, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.23.8.0\lib\net472\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.6.0\lib\net462\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.2\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Formats.Asn1, Version=8.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Formats.Asn1.8.0.1\lib\net462\System.Formats.Asn1.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.6.0\lib\net462\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.6.0\lib\net462\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.1.0\lib\net462\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=8.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.8.0.5\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.6.0\lib\net462\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -129,71 +168,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CustomerDashboardController.cs" />
     <Compile Include="Controllers\EmployeeManagementController.cs" />
     <Compile Include="Controllers\FoodMenuController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OrderManagementController.cs" />
     <Compile Include="Controllers\RestaurantDashboardController.cs" />
     <Compile Include="Controllers\RestaurantProfileController.cs" />
-    <Compile Include="DBContext\Cart.cs">
-      <DependentUpon>FoodCourtManagementSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContext\Cart_FoodItem.cs">
-      <DependentUpon>FoodCourtManagementSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContext\Coupon.cs">
-      <DependentUpon>FoodCourtManagementSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContext\Customer.cs">
-      <DependentUpon>FoodCourtManagementSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContext\Customer_GiftCard_Use.cs">
-      <DependentUpon>FoodCourtManagementSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContext\Employee.cs">
-      <DependentUpon>FoodCourtManagementSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContext\FoodCourtManagementSystemDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FoodCourtManagementSystemDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContext\FoodCourtManagementSystemDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FoodCourtManagementSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContext\FoodCourtManagementSystemDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FoodCourtManagementSystemDB.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DBContext\FoodItem.cs">
-      <DependentUpon>FoodCourtManagementSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContext\GiftCard.cs">
-      <DependentUpon>FoodCourtManagementSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContext\Order.cs">
-      <DependentUpon>FoodCourtManagementSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContext\Order_FoodItem.cs">
-      <DependentUpon>FoodCourtManagementSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContext\Restaurant.cs">
-      <DependentUpon>FoodCourtManagementSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContext\Restaurant_FoodItem.cs">
-      <DependentUpon>FoodCourtManagementSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContext\Transaction.cs">
-      <DependentUpon>FoodCourtManagementSystemDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBContext\Wallet.cs">
-      <DependentUpon>FoodCourtManagementSystemDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -202,12 +185,13 @@
     <Compile Include="Models\CouponModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\Customer_GiftCard_UseModel.cs" />
+    <Compile Include="Models\Custom\CustomerModel.cs" />
+    <Compile Include="Models\Custom\LoginModel.cs" />
     <Compile Include="Models\EmployeeManagementViewModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\FoodItemModel.cs" />
     <Compile Include="Models\FoodMenuViewModel.cs" />
     <Compile Include="Models\GiftCardModel.cs" />
-    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\OrderManagementViewModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\Order_FoodItemModel.cs" />
@@ -218,8 +202,16 @@
     <Compile Include="Models\TransactionModel.cs" />
     <Compile Include="Models\WalletModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\SmsService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\images\avatar.jpg" />
+    <Content Include="Assets\images\facebook-icon.png" />
+    <Content Include="Assets\images\img_search.png" />
+    <Content Include="Assets\images\img_shopping_cart.png" />
+    <Content Include="Assets\images\instagram-icon.png" />
+    <Content Include="Assets\images\site-logo.png" />
+    <Content Include="Assets\images\x-icon.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -243,16 +235,6 @@
     <Content Include="Content\CSS\OrderManagement.css" />
     <Content Include="Content\CSS\RestaurantProfile.css" />
     <Content Include="Content\CSS\RestaurantDashboard.css" />
-    <Content Include="DBContext\FoodCourtManagementSystemDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>FoodCourtManagementSystemDB.edmx</DependentUpon>
-      <LastGenOutput>FoodCourtManagementSystemDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="DBContext\FoodCourtManagementSystemDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>FoodCourtManagementSystemDB.edmx</DependentUpon>
-      <LastGenOutput>FoodCourtManagementSystemDB.cs</LastGenOutput>
-    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -262,13 +244,17 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="DBContext\FoodCourtManagementSystemDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>FoodCourtManagementSystemDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="DBContext\FoodCourtManagementSystemDB.edmx.diagram">
-      <DependentUpon>FoodCourtManagementSystemDB.edmx</DependentUpon>
-    </Content>
+    <Content Include="Views\Auth\ForgotPassword.cshtml" />
+    <Content Include="Views\Auth\CustomerLogin.cshtml" />
+    <Content Include="Views\Auth\OTPVerification.cshtml" />
+    <Content Include="Views\Auth\Register.cshtml" />
+    <Content Include="Views\Auth\ResetPassword.cshtml" />
+    <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Oracle.ManagedDataAccess.Client.Configuration.Section.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -295,15 +281,20 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\CustomerDashboard\CustomerDashboard.cshtml" />
-    <Content Include="Views\RestaurantDashboard\RestaurantDashboard.cshtml" />
+    <Content Include="Views\RestaurantDashboard\Index.cshtml" />
     <Content Include="Views\RestaurantProfile\RestaurantProfile.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\EmployeeManagement\Index.cshtml" />
     <Content Include="Views\FoodMenu\Index.cshtml" />
     <Content Include="Views\OrderManagement\Index.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Auth\RestaurantLogin.cshtml" />
+    <Content Include="Views\Account\CustomerDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\custom\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
