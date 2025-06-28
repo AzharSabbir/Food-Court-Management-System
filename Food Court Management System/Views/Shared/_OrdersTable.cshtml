@@ -1,0 +1,27 @@
+﻿@model Food_Court_Management_System.Models.Custom.OrdersViewModel
+
+<table class="table table-bordered recent-table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Order Time</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+                <td>@order.OrderID</td>
+                <td>@order.OrderTime.ToString("g")</td>
+                <td>$@order.OrderAmount</td>
+                <td>@order.OrderStatus</td>
+                <td>
+                    <a href="@Url.Action("ViewOrderDetails", "CustomerDashboard", new { orderId = order.OrderID })" class="btn btn-sm btn-outline-primary">View Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -34,7 +34,7 @@
     <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -169,38 +169,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminDashboardController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CustomerDashboardController.cs" />
-    <Compile Include="Controllers\EmployeeManagementController.cs" />
-    <Compile Include="Controllers\FoodMenuController.cs" />
+    <Compile Include="Controllers\FoodController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\OrderManagementController.cs" />
-    <Compile Include="Controllers\RestaurantDashboardController.cs" />
-    <Compile Include="Controllers\RestaurantProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CartModel.cs" />
-    <Compile Include="Models\Cart_FoodItemModel.cs" />
-    <Compile Include="Models\CouponModel.cs" />
-    <Compile Include="Models\CustomerModel.cs" />
-    <Compile Include="Models\Customer_GiftCard_UseModel.cs" />
+    <Compile Include="Models\Custom\CustomerDashboardViewModel.cs" />
+    <Compile Include="Models\Custom\AdminDashboardViewModel.cs" />
     <Compile Include="Models\Custom\CustomerModel.cs" />
+    <Compile Include="Models\Custom\FoodItemDetailsViewModel.cs" />
     <Compile Include="Models\Custom\LoginModel.cs" />
-    <Compile Include="Models\EmployeeManagementViewModel.cs" />
-    <Compile Include="Models\EmployeeModel.cs" />
-    <Compile Include="Models\FoodItemModel.cs" />
-    <Compile Include="Models\FoodMenuViewModel.cs" />
-    <Compile Include="Models\GiftCardModel.cs" />
-    <Compile Include="Models\OrderManagementViewModel.cs" />
-    <Compile Include="Models\OrderModel.cs" />
-    <Compile Include="Models\Order_FoodItemModel.cs" />
-    <Compile Include="Models\RestaurantDashboardViewModel.cs" />
-    <Compile Include="Models\RestaurantModel.cs" />
-    <Compile Include="Models\RestaurantProfileViewModel.cs" />
-    <Compile Include="Models\Restaurant_FoodItemModel.cs" />
-    <Compile Include="Models\TransactionModel.cs" />
-    <Compile Include="Models\WalletModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\SmsService.cs" />
   </ItemGroup>
@@ -280,17 +261,28 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\CustomerDashboard\CustomerDashboard.cshtml" />
-    <Content Include="Views\RestaurantDashboard\Index.cshtml" />
-    <Content Include="Views\RestaurantProfile\RestaurantProfile.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\EmployeeManagement\Index.cshtml" />
-    <Content Include="Views\FoodMenu\Index.cshtml" />
-    <Content Include="Views\OrderManagement\Index.cshtml" />
-    <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Auth\RestaurantLogin.cshtml" />
     <Content Include="Views\Account\CustomerDetails.cshtml" />
+    <Content Include="Views\Auth\AdminLogin.cshtml" />
+    <Content Include="Views\AdminDashboard\Index.cshtml" />
+    <Content Include="Views\AdminDashboard\Restaurants.cshtml" />
+    <Content Include="Views\Shared\_RestaurantTable.cshtml" />
+    <Content Include="Views\AdminDashboard\Users.cshtml" />
+    <Content Include="Views\Shared\_UserTable.cshtml" />
+    <Content Include="Views\Shared\_EmployeeTable.cshtml" />
+    <Content Include="Views\AdminDashboard\Employees.cshtml" />
+    <Content Include="Views\AdminDashboard\Transactions.cshtml" />
+    <Content Include="Views\Shared\_TransactionTable.cshtml" />
+    <Content Include="Views\AdminDashboard\Coupons.cshtml" />
+    <Content Include="Views\Shared\_CouponTable.cshtml" />
+    <Content Include="Views\CustomerDashboard\Index.cshtml" />
+    <Content Include="Views\CustomerDashboard\Orders.cshtml" />
+    <Content Include="Views\Shared\_OrdersTable.cshtml" />
+    <Content Include="Views\CustomerDashboard\ViewOrderDetails.cshtml" />
+    <Content Include="Views\CustomerDashboard\Transactions.cshtml" />
+    <Content Include="Views\CustomerDashboard\Profile.cshtml" />
+    <Content Include="Views\Food\FoodItemDetails.cshtml" />
+    <Content Include="Views\Food\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

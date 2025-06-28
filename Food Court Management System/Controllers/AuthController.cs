@@ -415,5 +415,60 @@ namespace Food_Court_Management_System.Controllers
             }
         }
 
+        public ActionResult AdminLogin()
+        {
+            if (Request.IsAuthenticated) return RedirectToAction("Index", "Home");
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AdminLogin(LoginModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Message = "Invalid form submission.";
+                ViewBag.IsSuccess = false;
+                return View(model);
+            }
+
+            try
+            {
+                using (OracleConnection con = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString))
+                {
+                    con.Open();
+
+                    string query = "SELECT * FROM Admin WHERE Email = :email AND Password = :password";
+                    using (OracleCommand cmd = new OracleCommand(query, con))
+                    {
+                        cmd.Parameters.Add(new OracleParameter("email", model.Username));
+                        cmd.Parameters.Add(new OracleParameter("password", model.Password));
+
+                        using (OracleDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                string username = reader.GetString(reader.GetOrdinal("Username"));
+                                FormsAuthentication.SetAuthCookie(username, true);
+
+                                return RedirectToAction("Index", "AdminDashboard");
+                            }
+                        }
+                    }
+                }
+
+                ViewBag.Message = "Invalid email or password.";
+                ViewBag.IsSuccess = false;
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Error: " + ex.Message;
+                ViewBag.IsSuccess = false;
+                return View(model);
+            }
+        }
+
+
     }
 }

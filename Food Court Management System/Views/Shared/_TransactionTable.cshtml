@@ -1,0 +1,50 @@
+﻿@model Food_Court_Management_System.Models.Custom.TransactionListViewModel
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Transaction ID</th>
+            <th>Order ID</th>
+            <th>Wallet ID</th>
+            <th>Time</th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Note</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Transactions.Count == 0)
+        {
+            <tr><td colspan="7" class="text-center">No transactions found.</td></tr>
+        }
+        else
+        {
+            foreach (var t in Model.Transactions)
+            {
+                <tr>
+                    <td>@t.TransactionID</td>
+                    <td>@(t.OrderID.HasValue ? t.OrderID.ToString() : "-")</td>
+                    <td>@t.WalletID</td>
+                    <td>@t.TransactionTime.ToString("g")</td>
+                    <td>@t.TransactionAmount.ToString("0.00")</td>
+                    <td>@t.Type</td>
+                    <td>@t.Note</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@if (Model.TotalPages > 1)
+{
+    <nav>
+        <ul class="pagination">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                    <a href="#" class="page-link" data-page="@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

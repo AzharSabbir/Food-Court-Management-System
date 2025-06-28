@@ -20,7 +20,7 @@ namespace Food_Court_Management_System.Controllers
             }
 
 
-            return View();
+            return RedirectToAction("Index", "CustomerDashboard");
         }
 
         public ActionResult About()

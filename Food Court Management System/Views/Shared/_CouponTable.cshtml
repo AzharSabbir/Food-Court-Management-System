@@ -1,0 +1,48 @@
+﻿@model Food_Court_Management_System.Models.Custom.CouponListViewModel
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Coupon ID</th>
+            <th>Coupon Code</th>
+            <th>Discount (%)</th>
+            <th>Expiry Date</th>
+            <th>Min Order Value</th>
+            <th>Available Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Coupons.Count == 0)
+        {
+            <tr><td colspan="6" class="text-center">No coupons found.</td></tr>
+        }
+        else
+        {
+            foreach (var c in Model.Coupons)
+            {
+                <tr>
+                    <td>@c.CouponID</td>
+                    <td>@c.CouponCode</td>
+                    <td>@c.Discount.ToString("0.00")</td>
+                    <td>@c.ExpiryDate.ToString("yyyy-MM-dd")</td>
+                    <td>@(c.OrderValue.HasValue ? c.OrderValue.Value.ToString("0.00") : "-")</td>
+                    <td>@c.AvailableQuantity</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@if (Model.TotalPages > 1)
+{
+    <nav>
+        <ul class="pagination">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                    <a href="#" class="page-link" data-page="@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

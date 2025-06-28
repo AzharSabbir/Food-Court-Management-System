@@ -1,0 +1,37 @@
+﻿@model Food_Court_Management_System.Models.Custom.RestaurantListViewModel
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model.Restaurants)
+        {
+            <tr>
+                <td>@r.RestaurantID</td>
+                <td>@r.Name</td>
+                <td>@r.Email</td>
+                <td>@r.Phone</td>
+                <td>@r.Address</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Pagination -->
+<nav>
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a class="page-link" href="#" data-page="@i">@i</a>
+            </li>
+        }
+    </ul>
+</nav>

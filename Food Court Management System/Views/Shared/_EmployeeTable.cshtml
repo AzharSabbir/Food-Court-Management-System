@@ -1,0 +1,48 @@
+﻿@model Food_Court_Management_System.Models.Custom.EmployeeListViewModel
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Designation</th>
+            <th>Restaurant ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Employees.Count == 0)
+        {
+            <tr><td colspan="6" class="text-center">No employees found.</td></tr>
+        }
+        else
+        {
+            foreach (var emp in Model.Employees)
+            {
+                <tr>
+                    <td>@emp.EmployeeID</td>
+                    <td>@emp.Name</td>
+                    <td>@emp.Email</td>
+                    <td>@emp.Phone</td>
+                    <td>@emp.Designation</td>
+                    <td>@emp.RestaurantID</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@if (Model.TotalPages > 1)
+{
+    <nav>
+        <ul class="pagination">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                    <a href="#" class="page-link" data-page="@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

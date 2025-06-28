@@ -1,0 +1,50 @@
+﻿@model Food_Court_Management_System.Models.Custom.CustomerListViewModel
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Customer ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Name</th>
+            <th>Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Customers.Count == 0)
+        {
+            <tr>
+                <td colspan="6" class="text-center">No users found.</td>
+            </tr>
+        }
+        else
+        {
+            foreach (var user in Model.Customers)
+            {
+                <tr>
+                    <td>@user.CustomerID</td>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>@user.Phone</td>
+                    <td>@user.Name</td>
+                    <td>@user.Address</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@if (Model.TotalPages > 1)
+{
+    <nav>
+        <ul class="pagination">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                    <a href="#" class="page-link" data-page="@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}
