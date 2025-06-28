@@ -8,15 +8,6 @@ using System.Web.Mvc;
 
 namespace Food_Court_Management_System.Controllers
 {
-    public class Restaurant
-    {
-        public int RestaurantID { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string Phone { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
-    }
     [AllowAnonymous]
     public class HomeController : Controller
     {
@@ -28,41 +19,8 @@ namespace Food_Court_Management_System.Controllers
                 return RedirectToAction("Index", "RestaurantDashboard");
             }
 
-            List<Restaurant> restaurants = new List<Restaurant>();
 
-            try
-            {
-                using (OracleConnection con = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString))
-                {
-                    con.Open();
-                    string query = "SELECT * FROM Restaurant";
-
-                    using (OracleCommand cmd = new OracleCommand(query, con))
-                    using (OracleDataReader reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            restaurants.Add(new Restaurant
-                            {
-                                RestaurantID = reader.GetInt32(reader.GetOrdinal("RestaurantID")),
-                                Email = reader.GetString(reader.GetOrdinal("Email")),
-                                Password = reader.GetString(reader.GetOrdinal("Password")),
-                                Phone = reader.GetString(reader.GetOrdinal("Phone")),
-                                Name = reader.GetString(reader.GetOrdinal("Name")),
-                                Address = reader.GetString(reader.GetOrdinal("Address"))
-                            });
-                        }
-                    }
-                }
-
-                ViewBag.Result = "Success";
-            }
-            catch (Exception e)
-            {
-                ViewBag.Result = "Error: " + e.Message;
-            }
-
-            return View(restaurants);
+            return View();
         }
 
         public ActionResult About()
